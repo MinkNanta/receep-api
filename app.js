@@ -1,5 +1,5 @@
 const path = require("path");
-require("dotenv").config({ path: "/etc/secrets/.env" });
+require("dotenv").config();
 
 const express = require("express");
 const cors = require("cors");
@@ -8,12 +8,13 @@ const authenticate = require("./middlewares/authenticate");
 const errorMiddleware = require("./middlewares/error");
 const notFoundMiddleware = require("./middlewares/notFound");
 const authRoute = require("./routes/authRoute");
-const { sequelize } = require("./models");
-sequelize.sync({ force: true });
+
+// const { sequelize } = require("./models");
+// sequelize.sync({ force: true });
 
 const app = express();
-// app.use(express.json());
-// app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 app.use(cors());
 if (process.env.NODE_ENV === "development") {
