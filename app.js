@@ -1,5 +1,5 @@
 const path = require("path");
-require("dotenv").config({ path: path.join(__dirname, ".env") });
+require("dotenv").config({ path: "/etc/secrets/.env" });
 
 const express = require("express");
 const cors = require("cors");
@@ -20,7 +20,10 @@ if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
 
-app.use("/", authRoute);
+// app.use("/", authRoute);
+app.get("/", (q, res) => {
+  res.send(hi);
+});
 
 app.use(notFoundMiddleware);
 app.use(errorMiddleware);
