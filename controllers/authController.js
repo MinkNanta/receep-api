@@ -5,8 +5,8 @@ const { User } = require("../models");
 const jwt = require("jsonwebtoken");
 
 const genToken = (payload) =>
-  jwt.sign(payload, "qwerty", {
-    expiresIn: "30d",
+  jwt.sign(payload, process.env.JWT_SECRET_KEY, {
+    expiresIn: process.env.JWT_EXPIRES_IN + "",
   });
 
 exports.getUser = async (req, res, next) => {
@@ -54,6 +54,7 @@ exports.signup = async (req, res, next) => {
 exports.signin = async (req, res, next) => {
   try {
     const { email, password } = req.body;
+    console.log(email);
     const user = await User.findOne({
       where: { email: email },
     });

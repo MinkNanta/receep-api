@@ -1,7 +1,13 @@
 module.exports = (sequelize, DataTypes) => {
-  const Menu = sequelize.define(
-    "Menu",
+  const OrderItem = sequelize.define(
+    "OrderItem",
     {
+      sweet: {
+        type: DataTypes.STRING,
+      },
+      note: {
+        type: DataTypes.STRING,
+      },
       category: {
         type: DataTypes.STRING,
       },
@@ -9,6 +15,9 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
       },
       description: {
+        type: DataTypes.STRING,
+      },
+      totalItem: {
         type: DataTypes.STRING,
       },
       price: {
@@ -20,10 +29,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  Menu.associate = (models) => {
-    Menu.belongsTo(models.User, {
+  OrderItem.associate = (models) => {
+    OrderItem.belongsTo(models.Order, {
       foreignKey: {
-        name: "userId",
+        name: "orderId",
         allowNull: false,
       },
       onUpdate: "CASCADE",
@@ -31,5 +40,5 @@ module.exports = (sequelize, DataTypes) => {
     });
   };
 
-  return Menu;
+  return OrderItem;
 };

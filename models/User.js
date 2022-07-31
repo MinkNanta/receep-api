@@ -24,8 +24,24 @@ module.exports = (sequelize, DataTypes) => {
         name: "userId",
         allowNull: false,
       },
-      onUpdate: "RESTRICT",
-      onDelete: "RESTRICT",
+      onUpdate: "CASCADE",
+      onDelete: "CASCADE",
+    });
+    User.hasMany(models.Category, {
+      foreignKey: {
+        name: "userId",
+        allowNull: false,
+      },
+      onUpdate: "CASCADE",
+      onDelete: "CASCADE",
+    });
+    User.hasMany(models.Order, {
+      foreignKey: {
+        name: "userId",
+        allowNull: false,
+      },
+      onUpdate: "CASCADE",
+      onDelete: "CASCADE",
     });
   };
 

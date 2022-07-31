@@ -1,17 +1,11 @@
 module.exports = (sequelize, DataTypes) => {
-  const Menu = sequelize.define(
-    "Menu",
+  const Category = sequelize.define(
+    "Category",
     {
-      category: {
+      icon: {
         type: DataTypes.STRING,
       },
-      title: {
-        type: DataTypes.STRING,
-      },
-      description: {
-        type: DataTypes.STRING,
-      },
-      price: {
+      name: {
         type: DataTypes.STRING,
       },
     },
@@ -20,8 +14,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  Menu.associate = (models) => {
-    Menu.belongsTo(models.User, {
+  Category.associate = (models) => {
+    Category.belongsTo(models.User, {
       foreignKey: {
         name: "userId",
         allowNull: false,
@@ -31,5 +25,5 @@ module.exports = (sequelize, DataTypes) => {
     });
   };
 
-  return Menu;
+  return Category;
 };
