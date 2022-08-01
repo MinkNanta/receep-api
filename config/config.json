@@ -18,7 +18,6 @@
     "password": "1qaz!QAZ",
     "database": "receepdb",
     "host": "receep.ccai2zazqq8e.us-west-2.rds.amazonaws.com",
-
     "dialect": "mysql"
   }
 }

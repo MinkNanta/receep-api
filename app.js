@@ -1,4 +1,3 @@
-const path = require("path");
 require("dotenv").config();
 
 const express = require("express");
@@ -26,9 +25,6 @@ if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
 
-// app.use("/", (req, res) => {
-//   res.send("hiiiiii");
-// });
 app.use("/", authRoute);
 app.use("/menu", authenticate, menuRoute);
 app.use("/order", authenticate, orderRoute);
