@@ -1,11 +1,10 @@
-require("dotenv").config();
-
 const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
 const errorMiddleware = require("./middlewares/error");
 const notFoundMiddleware = require("./middlewares/notFound");
 const { sequelize } = require("./models");
+require("dotenv").config();
 
 ///////////// Router //////////
 const authenticate = require("./middlewares/authenticate");
