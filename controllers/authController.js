@@ -74,3 +74,36 @@ exports.signin = async (req, res, next) => {
     next(error);
   }
 };
+exports.changePassword = async (req, res, next) => {
+  try {
+    const { password, newPassword, confirmPassword } = req.body;
+    const { id } = req.user;
+
+    if (newPassword !== confirmPassword) {
+      createError("New Password & ConfirmPassword did not match ", 400);
+    }
+
+    const userPassword = await User.findOne({
+      where: { id },
+    });
+
+    if (!userPassword) {
+      createError("invalid credential", 400);
+    }
+
+    const isMatch = await bcrypt.compare(password, userPassword.password);
+
+    if (!isMatch) {
+      createError("invalid credential", 400);
+    }
+
+    const hashedPassword = await bcrypt.hash(newPassword, 12);
+
+    await User.update({ password: hashedPassword }, { where: { id } });
+
+    const token = genToken({ id });
+    res.status(201).json({ token });
+  } catch (error) {
+    next(error);
+  }
+};

@@ -6,5 +6,6 @@ const authenticate = require("../middlewares/authenticate");
 router.get("/", authenticate, authController.getUser);
 router.post("/signin", authController.signin);
 router.post("/signup", authController.signup);
+router.patch("/update", authenticate, authController.changePassword);
 
 module.exports = router;
